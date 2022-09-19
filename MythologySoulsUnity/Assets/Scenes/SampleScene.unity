@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 315580649}
   - component: {fileID: 315580648}
   - component: {fileID: 315580647}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -444,6 +444,7 @@ GameObject:
   - component: {fileID: 1829821899}
   - component: {fileID: 1829821898}
   - component: {fileID: 1829821904}
+  - component: {fileID: 1829821905}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -559,16 +560,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  axisSpeed: 0.05
-  rotationSpeed: 1
-  strafeSpeed: 1
-  gravity: -0.15
-  jumpForce: 0.2
-  playerCamera: {fileID: 0}
-  discludePlayer:
+  gravity: -9.81
+  jumpHeight: 3
+  turnSmoothTime: 0.5
+  controller: {fileID: 1829821905}
+  groundCheck: {fileID: 1829821902}
+  groundMask:
     serializedVersion: 2
-    m_Bits: 0
-  sensorLocal: {x: 0, y: -0.56, z: 0}
-  surfaceSlideSpeed: 1
-  slopeClimbSpeed: 1
-  slopeDecendSpeed: 1
+    m_Bits: 64
+  groundDistance: 0.4
+--- !u!143 &1829821905
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1829821897}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 2
+  m_Radius: 0.5000001
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
