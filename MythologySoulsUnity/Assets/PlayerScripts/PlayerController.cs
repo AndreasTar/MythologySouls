@@ -31,29 +31,33 @@ public class PlayerController : MonoBehaviour
         float vertical = Input.GetAxisRaw("Vertical");
         grounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
         HandleGrounded(horizontal, vertical);
-        velocity.y += gravity * Time.deltaTime;
-        controller.Move(velocity * Time.deltaTime);
+        //velocity.y += gravity * Time.deltaTime;
+        //controller.Move(velocity * Time.deltaTime);
         HandleRotationSmoothing();
-        controller.Move(direction * moveSpeed * Time.deltaTime);
+        controller.SimpleMove((velocity + direction) * moveSpeed);
     }
 
     void HandleGrounded(float horizontal, float vertical)
     {
-        if (grounded && velocity.y < 0)
-            velocity.y = 0.1f;
+        if (grounded) 
+        { 
+            velocity.y = 0.0001f; 
+        }
         if (!grounded && !debugMode)
+        {
             return;
+        }
         direction = new Vector3(horizontal, 0f, vertical).normalized;
         if (Input.GetButton("Jump"))
+        {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+        }
     }
 
     void HandleRotationSmoothing()
     {
-        if (!(direction.magnitude >= 0.1f))
-            return;
-        if (!grounded && !debugMode)
-            return;
+        if (!(direction.magnitude >= 0.1f)) return;
+        if (!grounded && !debugMode) return;
         float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
 
         Mathf.SmoothDampAngle(
